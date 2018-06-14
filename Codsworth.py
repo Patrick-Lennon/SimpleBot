@@ -1,4 +1,4 @@
-import _tkinter
+from _tkinter import *
 import pip
 package_name='tweepy'
 pip.main(['install', package_name])
@@ -11,6 +11,19 @@ access_token_secret = 'your access secret token'
 auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token, access_token_secret)
 api = tweepy.API(auth)
+
+
+root = Tk()
+
+label1 = Label(root, text="Search")
+E1 = Entry(root, bd=5)
+
+label2 = Label(root, text="Number of Tweets")
+E2 = Entry(root, bd=5)
+
+label3 = Label(root, text="Favorite")
+E3 = Entry(root, bd=5)
+
 
 def doWork():
     search = getE1()
@@ -30,16 +43,6 @@ def doWork():
             except StopIteration:
                 break
 
-root = Tk()
-
-label1 = Label(root, text="Search")
-E1 = Entry(root, bd=5)
-
-label2 = Label(root, text="Number of Tweets")
-E2 = Entry(root, bd=5)
-
-label3 = Label(root, text="Favorite")
-E3 = Entry(root, bd=5)
 
 label1.pack()
 E1.pack()
@@ -49,8 +52,6 @@ E2.pack()
 
 label3.pack()
 E3.pack()
-
-root.mainloop()
 
 def getE1():
     return E1.get()
@@ -64,3 +65,5 @@ def getE3():
 submit = Button(root, text="Submit", command = doWork)
 
 submit.pack()
+
+root.mainloop()
