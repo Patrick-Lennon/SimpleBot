@@ -13,17 +13,22 @@ auth.set_access_token(access_token, access_token_secret)
 api = tweepy.API(auth)
 
 def doWork():
-    search = "keyword"
+    search = getE1()
 
-    numberOfTweets = "100"
+    numberOfTweets = getE2()
+    numberOfTweets = int(numberOfTweets)
 
-    for tweet in tweepy.Cursor(api.search, search).items(numberOfTweets):
-        try:
-            tweet.favorite()
-        except tweepy.TweepError as e:
-            print(e.reason)
-        except StopIteration:
-            break
+    fav = getE3()
+
+
+    if fav == "yes" or fav == "Yes":
+        for tweet in tweepy.Cursor(api.search, search).items(numberOfTweets):
+            try:
+                tweet.favorite()
+            except tweepy.TweepError as e:
+                print(e.reason)
+            except StopIteration:
+                break
 
 root = Tk()
 
@@ -46,3 +51,16 @@ label3.pack()
 E3.pack()
 
 root.mainloop()
+
+def getE1():
+    return E1.get()
+
+def getE2():
+    return E2.get()
+
+def getE3():
+    return E3.get()
+
+submit = Button(root, text="Submit", command = doWork)
+
+submit.pack()
